@@ -28,6 +28,7 @@
                 if (command == "quit")
                 {
                     Console.WriteLine("Goodbye!");
+                    break;
                 }
                 else if (command == "load")
                 {
