@@ -82,10 +82,10 @@
                     else if (argument.Length == 1)
                     {
                         Console.WriteLine("Write word in Swedish: ");
-                        string s = Console.ReadLine();
+                        string swedishWord = Console.ReadLine();
                         Console.Write("Write word in English: ");
-                        string e = Console.ReadLine();
-                        DeleteGloss(s, e);
+                        string englishWord = Console.ReadLine();
+                        DeleteGloss(swedishWord, englishWord);
                     }
                 }
                 else if (command == "translate")
