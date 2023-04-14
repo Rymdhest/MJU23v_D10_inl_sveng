@@ -144,17 +144,25 @@
 
         private static void loadGloss(string argument)
         {
-            using (StreamReader sr = new StreamReader(defaultDirectory + argument)) //FIXME check if file excists
+            try
             {
-                dictionary = new List<SweEngGloss>(); // Empty it!
-                string line = sr.ReadLine();
-                while (line != null)
+                using (StreamReader sr = new StreamReader(defaultDirectory + argument)) //FIXME check if file excists
                 {
-                    SweEngGloss gloss = new SweEngGloss(line);
-                    dictionary.Add(gloss);
-                    line = sr.ReadLine();
+                    dictionary = new List<SweEngGloss>(); // Empty it!
+                    string line = sr.ReadLine();
+                    while (line != null)
+                    {
+                        SweEngGloss gloss = new SweEngGloss(line);
+                        dictionary.Add(gloss);
+                        line = sr.ReadLine();
+                    }
                 }
+            } catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
             }
+            
+
         }
     }
 }
