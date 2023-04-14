@@ -67,10 +67,10 @@
                     else if (argument.Length == 1)
                     {
                         Console.WriteLine("Write word in Swedish: ");
-                        string s = Console.ReadLine();
+                        string sweedishWord = Console.ReadLine();
                         Console.Write("Write word in English: ");
-                        string e = Console.ReadLine();
-                        dictionary.Add(new SweEngGloss(s, e));
+                        string englishWord = Console.ReadLine();
+                        dictionary.Add(new SweEngGloss(sweedishWord, englishWord)); //FIXME check words are not null
                     }
                 }
                 else if (command == "delete")
