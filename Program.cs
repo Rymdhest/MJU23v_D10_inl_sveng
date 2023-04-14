@@ -72,7 +72,11 @@
                         string sweedishWord = Console.ReadLine();
                         Console.Write("Write word in English: ");
                         string englishWord = Console.ReadLine();
+                        //FIXME check that a list excists
                         dictionary.Add(new SweEngGloss(sweedishWord, englishWord)); //FIXME check words are not null
+                    } else
+                    {
+                        Console.WriteLine("Wrong number of arguments");
                     }
                 }
                 else if (command == "delete")
