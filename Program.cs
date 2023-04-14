@@ -53,9 +53,9 @@
                 }
                 else if (command == "list")
                 {
-                    foreach (SweEngGloss gloss in dictionary)
+                    foreach (SweEngGloss gloss in dictionary) //FIXME check that a list excists
                     {
-                        Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+                        Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}"); 
                     }
                 }
                 else if (command == "new")
@@ -77,14 +77,7 @@
                 {
                     if (argument.Length == 3)
                     {
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
-                        {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index); //FIXME check range
+                        DeleteGloss(argument[1], argument[2]);
                     }
                     else if (argument.Length == 1)
                     {
@@ -92,14 +85,7 @@
                         string s = Console.ReadLine();
                         Console.Write("Write word in English: ");
                         string e = Console.ReadLine();
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
-                        {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == s && gloss.word_eng == e)
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index); //FIXME check range
+                        DeleteGloss(s, e);
                     }
                 }
                 else if (command == "translate")
@@ -133,6 +119,18 @@
                 }
             }
             while (true);
+        }
+
+        private static void DeleteGloss(string s, string e)
+        {
+            int index = -1;
+            for (int i = 0; i < dictionary.Count; i++)
+            {
+                SweEngGloss gloss = dictionary[i];
+                if (gloss.word_swe == s && gloss.word_eng == e)
+                    index = i;
+            }
+            dictionary.RemoveAt(index); //FIXME check range
         }
 
         private static void loadGloss(string argument)
