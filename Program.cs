@@ -93,6 +93,10 @@
                         string englishWord = Console.ReadLine();
                         DeleteGloss(swedishWord, englishWord);
                     }
+                    else
+                    {
+                        Console.WriteLine("Wrong number of arguments");
+                    }
                 }
                 else if (command == "translate")
                 {
@@ -129,7 +133,7 @@
         private static void DeleteGloss(string s, string e)
         {
             int index = -1;
-            for (int i = 0; i < dictionary.Count; i++)
+            for (int i = 0; i < dictionary.Count; i++) //FIXME check that dictionary excists
             {
                 SweEngGloss gloss = dictionary[i];
                 if (gloss.word_swe == s && gloss.word_eng == e)
