@@ -92,25 +92,13 @@
                 {
                     if (argument.Length == 2)
                     {
-                        foreach (SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == argument[1])
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == argument[1])
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                        }
+                        TranslateWord(argument[1]);
                     }
                     else if (argument.Length == 1)
                     {
                         Console.WriteLine("Write word to be translated: ");
                         string word = Console.ReadLine();
-                        foreach (SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == word)
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == word)
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                        }
+                        TranslateWord(word);
                     }
                 }
                 else
@@ -119,6 +107,17 @@
                 }
             }
             while (true);
+        }
+
+        private static void TranslateWord(string argument)
+        {
+            foreach (SweEngGloss gloss in dictionary)
+            {
+                if (gloss.word_swe == argument)
+                    Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                if (gloss.word_eng == argument)
+                    Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+            }
         }
 
         private static void DeleteGloss(string s, string e)
