@@ -2,6 +2,7 @@
 {
     internal class Program
     {
+        private static string defaultDirectory = "..\\..\\..\\dict\\";
         static List<SweEngGloss> dictionary;
         class SweEngGloss
         {
@@ -18,7 +19,8 @@
         }
         static void Main(string[] args)
         {
-            string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
+           
+            string defaultFile = "sweeng.lis";
             Console.WriteLine("Welcome to the dictionary app!");
             do
             {
@@ -134,7 +136,7 @@
 
         private static void loadGloss(string argument)
         {
-            using (StreamReader sr = new StreamReader(argument)) //FIXME check if file excists
+            using (StreamReader sr = new StreamReader(defaultDirectory + argument)) //FIXME check if file excists
             {
                 dictionary = new List<SweEngGloss>(); // Empty it!
                 string line = sr.ReadLine();
