@@ -30,11 +30,21 @@
                     Console.WriteLine("Goodbye!");
                     break;
                 }
+                else if (command == "help")
+                {
+                    Console.WriteLine("quit - quits the application");
+                    Console.WriteLine("help - displays this help screen");
+                    Console.WriteLine("load - loads dictionary from a given file or default if not given");
+                    Console.WriteLine("list - displays the whole dictionary");
+                    Console.WriteLine("new - add a new glossary");
+                    Console.WriteLine("delete - delets a glossary");
+                    Console.WriteLine("translate - translates a given word");
+                }
                 else if (command == "load")
                 {
-                    if(argument.Length == 2)
+                    if (argument.Length == 2)
                     {
-                        using (StreamReader sr = new StreamReader(argument[1]))
+                        using (StreamReader sr = new StreamReader(argument[1])) //FIXME check if file excists
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
                             string line = sr.ReadLine();
@@ -46,9 +56,9 @@
                             }
                         }
                     }
-                    else if(argument.Length == 1)
+                    else if (argument.Length == 1)
                     {
-                        using (StreamReader sr = new StreamReader(defaultFile))
+                        using (StreamReader sr = new StreamReader(defaultFile)) //FIXME check if file excists
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
                             string line = sr.ReadLine();
@@ -63,7 +73,7 @@
                 }
                 else if (command == "list")
                 {
-                    foreach(SweEngGloss gloss in dictionary)
+                    foreach (SweEngGloss gloss in dictionary)
                     {
                         Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                     }
@@ -74,7 +84,7 @@
                     {
                         dictionary.Add(new SweEngGloss(argument[1], argument[2]));
                     }
-                    else if(argument.Length == 1)
+                    else if (argument.Length == 1)
                     {
                         Console.WriteLine("Write word in Swedish: ");
                         string s = Console.ReadLine();
@@ -88,12 +98,13 @@
                     if (argument.Length == 3)
                     {
                         int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++) {
+                        for (int i = 0; i < dictionary.Count; i++)
+                        {
                             SweEngGloss gloss = dictionary[i];
                             if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
                                 index = i;
                         }
-                        dictionary.RemoveAt(index);
+                        dictionary.RemoveAt(index); //FIXME check range
                     }
                     else if (argument.Length == 1)
                     {
@@ -108,14 +119,14 @@
                             if (gloss.word_swe == s && gloss.word_eng == e)
                                 index = i;
                         }
-                        dictionary.RemoveAt(index);
+                        dictionary.RemoveAt(index); //FIXME check range
                     }
                 }
                 else if (command == "translate")
                 {
                     if (argument.Length == 2)
                     {
-                        foreach(SweEngGloss gloss in dictionary)
+                        foreach (SweEngGloss gloss in dictionary)
                         {
                             if (gloss.word_swe == argument[1])
                                 Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
