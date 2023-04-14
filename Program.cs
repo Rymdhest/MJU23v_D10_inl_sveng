@@ -64,7 +64,14 @@
                 {
                     if (argument.Length == 3)
                     {
-                        dictionary.Add(new SweEngGloss(argument[1], argument[2]));
+                        try
+                        {
+                            dictionary.Add(new SweEngGloss(argument[1], argument[2]));
+                        }
+                        catch (NullReferenceException)
+                        {
+                            Console.WriteLine("Can not add new glossary when no dictionary is loaded");
+                        }
                     }
                     else if (argument.Length == 1)
                     {
@@ -72,8 +79,15 @@
                         string sweedishWord = Console.ReadLine();
                         Console.Write("Write word in English: ");
                         string englishWord = Console.ReadLine();
-                        //FIXME check that a list excists
-                        dictionary.Add(new SweEngGloss(sweedishWord, englishWord)); //FIXME check words are not null
+                        try
+                        {
+                            dictionary.Add(new SweEngGloss(sweedishWord, englishWord)); //FIXME check words are not null
+                        }
+                        catch (NullReferenceException)
+                        {
+                            Console.WriteLine("Can not add new glossary when no dictionary is loaded");
+                        }
+
                     } else
                     {
                         Console.WriteLine("Wrong number of arguments");
