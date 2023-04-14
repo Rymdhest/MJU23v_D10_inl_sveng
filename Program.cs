@@ -139,14 +139,21 @@
                 if (gloss.word_swe == s && gloss.word_eng == e)
                     index = i;
             }
-            dictionary.RemoveAt(index); //FIXME check range
+            if (index != -1)
+            {
+                dictionary.RemoveAt(index);
+            } else
+            {
+                Console.WriteLine("Could not delete " + s + ", " + e);
+            }
+           
         }
 
         private static void loadGloss(string argument)
         {
             try
             {
-                using (StreamReader sr = new StreamReader(defaultDirectory + argument)) //FIXME check if file excists
+                using (StreamReader sr = new StreamReader(defaultDirectory + argument))
                 {
                     dictionary = new List<SweEngGloss>(); // Empty it!
                     string line = sr.ReadLine();
