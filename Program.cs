@@ -130,21 +130,29 @@
             }
         }
 
-        private static void DeleteGloss(string s, string e)
+        private static void DeleteGloss(string swedishWord, string englishWord)
         {
             int index = -1;
-            for (int i = 0; i < dictionary.Count; i++) //FIXME check that dictionary excists
+            try
             {
-                SweEngGloss gloss = dictionary[i];
-                if (gloss.word_swe == s && gloss.word_eng == e)
-                    index = i;
+                for (int i = 0; i < dictionary.Count; i++)
+                {
+                    SweEngGloss gloss = dictionary[i];
+                    if (gloss.word_swe == swedishWord && gloss.word_eng == englishWord)
+                        index = i;
+                }
+            } catch (NullReferenceException)
+            {
+                Console.WriteLine("Can not delete when no list is loaded");
+                return;
             }
+
             if (index != -1)
             {
                 dictionary.RemoveAt(index);
             } else
             {
-                Console.WriteLine("Could not delete " + s + ", " + e);
+                Console.WriteLine("Could not delete " + swedishWord + ", " + englishWord);
             }
            
         }
